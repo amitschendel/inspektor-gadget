@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"sort"
 
+	"github.com/amitschendel/syscalls/pkg/syscalls"
 	"github.com/cilium/ebpf"
 	"github.com/cilium/ebpf/link"
-	libseccomp "github.com/seccomp/libseccomp-golang"
 
 	containercollection "github.com/inspektor-gadget/inspektor-gadget/pkg/container-collection"
 	gadgetcontext "github.com/inspektor-gadget/inspektor-gadget/pkg/gadget-context"
@@ -93,8 +93,7 @@ func syscallArrToNameList(v []byte) []string {
 		if val == 0 {
 			continue
 		}
-		call1 := libseccomp.ScmpSyscall(i)
-		name, err := call1.GetName()
+		name, err := syscalls.GetNameByNumber("", i)
 		if err != nil {
 			name = fmt.Sprintf("syscall%d", i)
 		}
