@@ -294,10 +294,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
     - name: Set up Docker Buildx
       id: buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
     - name: Cache Docker layers
       uses: actions/cache@v3.3.2
       with:
@@ -306,7 +306,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-docker-${{ matrix.type }}-${{ matrix.platform }}-
     - name: Login to Container Registry
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
@@ -344,7 +344,7 @@ jobs:
     # mode=max results in builder image layer of ~7GB because of btfhub files in a layer, which is too
     # large (gloabal limit 10GB) to work with GH caches. (TODO: if we can work with mode=max in future?)
     - name: Build gadget ${{ matrix.type }} ${{ matrix.os }} ${{ matrix.platform }} container image as artifacts
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v5
       with:
         context: /home/runner/work/inspektor-gadget/inspektor-gadget/
         file: /home/runner/work/inspektor-gadget/inspektor-gadget/Dockerfiles/gadget-${{ matrix.type }}.Dockerfile
@@ -364,7 +364,7 @@ jobs:
     - name: Publish gadget ${{ matrix.type }} ${{ matrix.os }} ${{ matrix.platform }} container image to registry
       id: publish-gadget-container-images
       if: github.event_name != 'pull_request'
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v5
       with:
         context: /home/runner/work/inspektor-gadget/inspektor-gadget/
         file: /home/runner/work/inspektor-gadget/inspektor-gadget/Dockerfiles/gadget-${{ matrix.type }}.Dockerfile
@@ -405,10 +405,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      uses: docker/setup-qemu-action@v3
     - name: Set up Docker Buildx
       id: buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
     - name: Cache Docker layers
       uses: actions/cache@v3.3.2
       with:
@@ -417,7 +417,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-docker-${{ matrix.platform }}-
     - name: Login to Container Registry
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
@@ -430,7 +430,7 @@ jobs:
         container-image: ${{ github.repository_owner }}/ig
         bcc: false
     - name: Build ig ${{ matrix.os }} ${{ matrix.platform }} container image as artifacts
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v5
       with:
         context: /home/runner/work/inspektor-gadget/inspektor-gadget/
         file: /home/runner/work/inspektor-gadget/inspektor-gadget/Dockerfiles/ig.Dockerfile
@@ -450,7 +450,7 @@ jobs:
     - name: Publish ig ${{ matrix.os }} ${{ matrix.platform }} container image to registry
       id: publish-ig-container-images
       if: github.event_name != 'pull_request'
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v5
       with:
         context: /home/runner/work/inspektor-gadget/inspektor-gadget/
         file: /home/runner/work/inspektor-gadget/inspektor-gadget/Dockerfiles/ig.Dockerfile
@@ -516,12 +516,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
         with:
           # TODO: Remove once buildx v0.12.0 is released with https://github.com/docker/buildx/pull/1965
           version: https://github.com/docker/buildx.git#e5cee892ed4fa2e0af53c54c09131c96c68383ff
       - name: Login to Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -579,12 +579,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
         with:
           # TODO: Remove once buildx v0.12.0 is released with https://github.com/docker/buildx/pull/1965
           version: https://github.com/docker/buildx.git#e5cee892ed4fa2e0af53c54c09131c96c68383ff
       - name: Login to Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -642,10 +642,10 @@ jobs:
           pattern: ${{ matrix.image.filter-pattern }}
     - name: Set up Docker Buildx
       if: steps.filter.outputs.pattern == 'true'
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
     - name: Login to Container Registry
       if: steps.filter.outputs.pattern == 'true'
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
@@ -661,7 +661,7 @@ jobs:
     - name: Build ${{ matrix.image.name }} image
       id: build-image
       if: steps.filter.outputs.pattern == 'true'
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v5
       with:
         context: ${{ matrix.image.dockerfile-dir }}
         file: ${{ matrix.image.dockerfile-dir }}/Dockerfile
@@ -691,9 +691,9 @@ jobs:
     - uses: actions/checkout@v4
     - name: Set up Docker Buildx
       id: buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
     - name: Login to Container Registry
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
@@ -706,7 +706,7 @@ jobs:
         container-image: ${{ env.CONTAINER_REPO }}
         bcc: false
     - name: Build example container
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v5
       with:
         context: /home/runner/work/inspektor-gadget/inspektor-gadget
         file: /home/runner/work/inspektor-gadget/inspektor-gadget/examples/${{ matrix.example }}/Dockerfile
