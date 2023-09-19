@@ -1,5 +1,3 @@
-package syscalls
-
 // Copyright 2023 The Inspektor Gadget authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,20 +12,16 @@ package syscalls
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-func GetSyscallNumberByName(name string) (int, bool) {
-	var number int
-	var ok bool
+package syscalls
 
-	number, ok = syscallsNameToNumber[name]
+func GetSyscallNumberByName(name string) (int, bool) {
+	number, ok := syscallsNameToNumber[name]
 
 	return number, ok
 }
 
 func GetSyscallNameByNumber(number int) (string, bool) {
-	var name string
-	var ok bool
-
-	name, ok = syscallsNumberToName[number]
+	name, ok := syscallsNumberToName[number]
 
 	return name, ok
 }
