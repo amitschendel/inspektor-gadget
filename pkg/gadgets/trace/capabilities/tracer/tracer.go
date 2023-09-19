@@ -236,7 +236,7 @@ func (t *Tracer) run() {
 
 		syscall, ok := syscalls.GetSyscallNameByNumber("", int(bpfEvent.Syscall))
 		if !ok {
-			syscall = fmt.Sprintf("syscall%d", syscall)
+			syscall = fmt.Sprintf("syscall%d", int(bpfEvent.Syscall))
 		}
 
 		var insetID *bool

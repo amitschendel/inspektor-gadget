@@ -20,7 +20,7 @@ func GetSyscallNumberByName(arch string, name string) (int, bool) {
 	} else if arch == "arm64" {
 		number, ok = arm64syscalls.SyscallsNameToNumber[name]
 	} else {
-		return -1, false
+		return 0, false
 	}
 
 	return number, ok
