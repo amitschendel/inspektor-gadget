@@ -93,7 +93,7 @@ func syscallArrToNameList(v []byte) []string {
 		if val == 0 {
 			continue
 		}
-		name, ok := syscalls.GetSyscallNameByNumber("", i)
+		name, ok := syscalls.GetSyscallNameByNumber(i)
 		if !ok {
 			name = fmt.Sprintf("syscall%d", i)
 		}

@@ -234,7 +234,7 @@ func (t *Tracer) run() {
 			verdict = "Allow"
 		}
 
-		syscall, ok := syscalls.GetSyscallNameByNumber("", int(bpfEvent.Syscall))
+		syscall, ok := syscalls.GetSyscallNameByNumber(int(bpfEvent.Syscall))
 		if !ok {
 			syscall = fmt.Sprintf("syscall%d", int(bpfEvent.Syscall))
 		}

@@ -136,7 +136,7 @@ func (t *Tracer) install() error {
 	// Fill the syscall map with specific syscall signatures.
 	syscallsMapSpec := spec.Maps["syscalls"]
 	for name, def := range syscallDefs {
-		number, ok := syscalls.GetSyscallNumberByName("", name)
+		number, ok := syscalls.GetSyscallNumberByName(name)
 		if !ok {
 			return fmt.Errorf("getting syscall number of %q: %w", name, err)
 		}

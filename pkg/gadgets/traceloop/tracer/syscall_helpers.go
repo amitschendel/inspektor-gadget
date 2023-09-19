@@ -41,7 +41,7 @@ type syscallDeclaration struct {
 }
 
 func syscallGetName(nr uint16) string {
-	name, ok := syscalls.GetSyscallNameByNumber("", int(nr))
+	name, ok := syscalls.GetSyscallNameByNumber(int(nr))
 	// Just do like strace (https://man7.org/linux/man-pages/man1/strace.1.html):
 	// Syscalls unknown to strace are printed raw
 	if !ok {

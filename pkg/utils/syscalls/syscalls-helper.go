@@ -1,46 +1,33 @@
 package syscalls
 
-import (
-	"runtime"
+// Copyright 2023 The Inspektor Gadget authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-	amd64syscalls "github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls/amd64"
-	arm64syscalls "github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls/arm64"
-)
-
-func GetSyscallNumberByName(arch string, name string) (int, bool) {
-	if arch == "" {
-		arch = runtime.GOARCH
-	}
-
+func GetSyscallNumberByName(name string) (int, bool) {
 	var number int
 	var ok bool
 
-	if arch == "amd64" {
-		number, ok = amd64syscalls.SyscallsNameToNumber[name]
-	} else if arch == "arm64" {
-		number, ok = arm64syscalls.SyscallsNameToNumber[name]
-	} else {
-		return 0, false
-	}
+	number, ok = syscallsNameToNumber[name]
 
 	return number, ok
 }
 
-func GetSyscallNameByNumber(arch string, number int) (string, bool) {
-	if arch == "" {
-		arch = runtime.GOARCH
-	}
-
+func GetSyscallNameByNumber(number int) (string, bool) {
 	var name string
 	var ok bool
 
-	if arch == "amd64" {
-		name, ok = amd64syscalls.SyscallsNumberToName[number]
-	} else if arch == "arm64" {
-		name, ok = arm64syscalls.SyscallsNumberToName[number]
-	} else {
-		return "", false
-	}
+	name, ok = syscallsNumberToName[number]
 
 	return name, ok
 }

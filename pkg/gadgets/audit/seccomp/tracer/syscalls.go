@@ -37,7 +37,7 @@ const (
 )
 
 func syscallToName(syscall int) string {
-	name, ok := syscalls.GetSyscallNameByNumber("", syscall)
+	name, ok := syscalls.GetSyscallNameByNumber(syscall)
 	if !ok {
 		name = fmt.Sprintf("syscall%d", syscall)
 	}
