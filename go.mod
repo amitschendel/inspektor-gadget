@@ -67,8 +67,6 @@ require (
 	oras.land/oras-go/v2 v2.3.0
 )
 
-require github.com/gocarina/gocsv v0.0.0-20230616125104-99d496ca653d // indirect
-
 require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20230811130428-ced1acdcaa24 // indirect
 	github.com/AdamKorcz/go-118-fuzz-build v0.0.0-20230306123547-8075edf89bb0 // indirect
@@ -78,7 +76,6 @@ require (
 	github.com/Masterminds/semver/v3 v3.2.1 // indirect
 	github.com/Masterminds/sprig/v3 v3.2.3 // indirect
 	github.com/Microsoft/go-winio v0.6.1 // indirect
-	github.com/amitschendel/syscalls v0.0.0-20230918082702-fa7c4b2dab8a
 	github.com/Microsoft/hcsshim v0.12.0-rc.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect

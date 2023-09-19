@@ -24,7 +24,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/amitschendel/syscalls/pkg/syscalls"
+	syscalls "github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
 )
 
 const syscallsPath = `/sys/kernel/debug/tracing/events/syscalls/`
@@ -41,10 +41,10 @@ type syscallDeclaration struct {
 }
 
 func syscallGetName(nr uint16) string {
-	name, err := syscalls.GetNameByNumber("", int(nr))
+	name, ok := syscalls.GetSyscallNameByNumber("", int(nr))
 	// Just do like strace (https://man7.org/linux/man-pages/man1/strace.1.html):
 	// Syscalls unknown to strace are printed raw
-	if err != nil {
+	if !ok {
 		return fmt.Sprintf("syscall_%x", nr)
 	}
 

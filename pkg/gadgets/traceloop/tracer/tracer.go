@@ -28,10 +28,10 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/amitschendel/syscalls/pkg/syscalls"
 	"github.com/cilium/ebpf"
 	"github.com/cilium/ebpf/link"
 	"github.com/cilium/ebpf/perf"
+	syscalls "github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
 	log "github.com/sirupsen/logrus"
 
 	containercollection "github.com/inspektor-gadget/inspektor-gadget/pkg/container-collection"
@@ -136,15 +136,15 @@ func (t *Tracer) install() error {
 	// Fill the syscall map with specific syscall signatures.
 	syscallsMapSpec := spec.Maps["syscalls"]
 	for name, def := range syscallDefs {
-		nr, err := syscalls.GetNumberByName("", name)
-		if err != nil {
+		number, ok := syscalls.GetSyscallNumberByName("", name)
+		if !ok {
 			return fmt.Errorf("getting syscall number of %q: %w", name, err)
 		}
 
 		// We need to do so to avoid taking each time the same address.
 		def := def
 		syscallsMapSpec.Contents = append(syscallsMapSpec.Contents, ebpf.MapKV{
-			Key:   uint64(nr),
+			Key:   uint64(number),
 			Value: def,
 		})
 	}

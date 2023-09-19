@@ -20,7 +20,7 @@ package tracer
 import (
 	"fmt"
 
-	"github.com/amitschendel/syscalls/pkg/syscalls"
+	syscalls "github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
 )
 
 const (
@@ -37,8 +37,8 @@ const (
 )
 
 func syscallToName(syscall int) string {
-	name, err := syscalls.GetNameByNumber("", syscall)
-	if err != nil {
+	name, ok := syscalls.GetSyscallNameByNumber("", syscall)
+	if !ok {
 		name = fmt.Sprintf("syscall%d", syscall)
 	}
 	return name
