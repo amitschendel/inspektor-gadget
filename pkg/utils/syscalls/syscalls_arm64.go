@@ -1,6 +1,3 @@
-//go:build linux && arm64
-// +build linux,arm64
-
 // Copyright 2023 The Inspektor Gadget authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +14,7 @@
 
 package syscalls
 
-// This updated to kernel 6.6-rc2
+// This is updated to kernel 6.6-rc2
 var syscallsNameToNumber = map[string]int{
 	"accept":                  202,
 	"accept4":                 242,
