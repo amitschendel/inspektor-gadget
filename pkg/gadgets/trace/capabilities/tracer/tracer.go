@@ -25,7 +25,7 @@ import (
 	"github.com/cilium/ebpf"
 	"github.com/cilium/ebpf/link"
 	"github.com/cilium/ebpf/perf"
-	syscalls "github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
+	"github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
 	"github.com/syndtr/gocapability/capability"
 
 	gadgetcontext "github.com/inspektor-gadget/inspektor-gadget/pkg/gadget-context"

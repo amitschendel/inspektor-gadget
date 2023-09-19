@@ -20,7 +20,7 @@ package tracer
 import (
 	"fmt"
 
-	syscalls "github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
+	"github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
 )
 
 const (

@@ -31,7 +31,7 @@ import (
 	"github.com/cilium/ebpf"
 	"github.com/cilium/ebpf/link"
 	"github.com/cilium/ebpf/perf"
-	syscalls "github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
+	"github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
 	log "github.com/sirupsen/logrus"
 
 	containercollection "github.com/inspektor-gadget/inspektor-gadget/pkg/container-collection"

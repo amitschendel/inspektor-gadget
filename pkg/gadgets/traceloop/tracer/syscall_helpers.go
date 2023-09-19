@@ -24,7 +24,7 @@ import (
 	"regexp"
 	"strings"
 
-	syscalls "github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
+	"github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
 )
 
 const syscallsPath = `/sys/kernel/debug/tracing/events/syscalls/`

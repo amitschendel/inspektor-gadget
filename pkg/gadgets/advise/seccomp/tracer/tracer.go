@@ -23,7 +23,7 @@ import (
 
 	"github.com/cilium/ebpf"
 	"github.com/cilium/ebpf/link"
-	syscalls "github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
+	"github.com/inspektor-gadget/inspektor-gadget/pkg/utils/syscalls"
 
 	containercollection "github.com/inspektor-gadget/inspektor-gadget/pkg/container-collection"
 	gadgetcontext "github.com/inspektor-gadget/inspektor-gadget/pkg/gadget-context"
